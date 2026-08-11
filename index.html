@@ -48,7 +48,8 @@
           </div>
 
           <button class="project-preview preview-trigger" type="button" data-pdf="https://drive.google.com/file/d/181UCRdbW8zLV4TqkNMyH46MqC70mXQKd/preview" aria-label="Preview Portfolio Sample 01">
-            <span class="preview-cover">
+            <span class="preview-cover preview-cover-01">
+              <img src="images/portfolio-01-cover.png" alt="Portfolio Sample 01 preview">
               <span class="preview-open">VIEW PREVIEW ↗</span>
             </span>
           </button>
@@ -77,7 +78,8 @@
           </div>
 
           <button class="project-preview preview-trigger" type="button" data-pdf="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/preview" aria-label="Preview Portfolio Sample 02">
-            <span class="preview-cover">
+            <span class="preview-cover preview-cover-02">
+              <img src="images/portfolio-02-cover.png" alt="Portfolio Sample 02 preview">
               <span class="preview-open">VIEW PREVIEW ↗</span>
             </span>
           </button>
@@ -98,6 +100,13 @@
           </div>
           <a class="view-work-link" href="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/view" target="_blank" rel="noopener noreferrer">View Work ↗</a>
         </article>
+
+      </div>
+
+      <div class="portfolio-footer">
+        <span>SELECTED WORK</span>
+        <span>MORE PROJECTS AVAILABLE ON REQUEST</span>
+      </div>
 
     </div>
   </section>
@@ -142,6 +151,7 @@
               <li>Maintained accuracy across text, tables and images using structured InDesign templates and pre-flight checks.</li>
               <li>Generated low-resolution PDFs for QC/client review and implemented multiple feedback rounds.</li>
               <li>Managed 3–4 simultaneous book projects across production cycles.</li>
+              <li>After finalization, prepared EPUB files for the digital team.</li>
             </ul>
           </div>
         </article>
@@ -434,6 +444,52 @@
 }
 
 /* Click-to-preview portfolio modal */
+.preview-cover-01 {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.92), rgba(225,224,219,.94)),
+    repeating-linear-gradient(0deg, transparent 0 34px, rgba(20,20,20,.055) 35px);
+}
+
+.cover-placeholder {
+  display: block;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 4.8rem);
+  line-height: .88;
+  letter-spacing: -.055em;
+  color: rgba(20,20,20,.68);
+}
+
+.cover-placeholder strong {
+  font-size: .28em;
+  letter-spacing: .16em;
+}
+
+.preview-cover-02 {
+  position: relative;
+  align-items: stretch;
+  justify-content: stretch;
+  background: #ddd;
+}
+
+.preview-cover-02 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(.96);
+}
+
+.preview-cover-02::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.16), transparent 45%);
+  pointer-events: none;
+}
+
 .preview-trigger {
   position: relative;
   display: block;
@@ -475,8 +531,8 @@
 }
 
 .preview-open {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  z-index: 3;
   margin: 18px;
   padding: 11px 14px;
   background: #151515;
