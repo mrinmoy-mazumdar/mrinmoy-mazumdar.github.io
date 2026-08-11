@@ -47,14 +47,11 @@
             <span>BOOK / DTP</span>
           </div>
 
-          <div class="project-preview">
-            <iframe
-              src="https://drive.google.com/file/d/181UCRdbW8zLV4TqkNMyH46MqC70mXQKd/preview"
-              title="Portfolio Sample 01 Preview"
-              loading="lazy"
-              allow="autoplay">
-            </iframe>
-          </div>
+          <button class="project-preview preview-trigger" type="button" data-pdf="https://drive.google.com/file/d/181UCRdbW8zLV4TqkNMyH46MqC70mXQKd/preview" aria-label="Preview Portfolio Sample 01">
+            <span class="preview-cover">
+              <span class="preview-open">VIEW PREVIEW ↗</span>
+            </span>
+          </button>
 
           <div class="project-caption">
             <div>
@@ -79,14 +76,11 @@
             <span>EDITORIAL / PRINT</span>
           </div>
 
-          <div class="project-preview">
-            <iframe
-              src="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/preview"
-              title="Portfolio Sample 02 Preview"
-              loading="lazy"
-              allow="autoplay">
-            </iframe>
-          </div>
+          <button class="project-preview preview-trigger" type="button" data-pdf="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/preview" aria-label="Preview Portfolio Sample 02">
+            <span class="preview-cover">
+              <span class="preview-open">VIEW PREVIEW ↗</span>
+            </span>
+          </button>
 
           <div class="project-caption">
             <div>
@@ -104,13 +98,6 @@
           </div>
           <a class="view-work-link" href="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/view" target="_blank" rel="noopener noreferrer">View Work ↗</a>
         </article>
-
-      </div>
-
-      <div class="portfolio-footer">
-        <span>SELECTED WORK</span>
-        
-      </div>
 
     </div>
   </section>
@@ -445,6 +432,191 @@
     flex-direction: column;
   }
 }
+
+/* Click-to-preview portfolio modal */
+.preview-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  cursor: pointer;
+  border: 1px solid rgba(20,20,20,.15);
+  background: #e9e8e4;
+  overflow: hidden;
+  text-align: left;
+}
+
+.preview-cover {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background: linear-gradient(135deg, #deddd8, #f4f3ef);
+  transition: transform .35s ease;
+}
+
+.preview-trigger::before {
+  content: "PDF";
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -.06em;
+  opacity: .12;
+  z-index: 1;
+}
+
+.preview-trigger:hover .preview-cover {
+  transform: scale(1.015);
+}
+
+.preview-open {
+  position: relative;
+  z-index: 2;
+  margin: 18px;
+  padding: 11px 14px;
+  background: #151515;
+  color: #fff;
+  font-size: .66rem;
+  letter-spacing: .11em;
+  font-weight: 700;
+}
+
+.pdf-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, visibility .2s ease;
+}
+
+.pdf-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.pdf-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,10,.88);
+  backdrop-filter: blur(5px);
+}
+
+.pdf-modal-panel {
+  position: relative;
+  z-index: 2;
+  width: min(1180px, 94vw);
+  height: min(92vh, 900px);
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(0,0,0,.35);
+}
+
+.pdf-modal-panel iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.pdf-modal-close {
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  right: 10px;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20,20,20,.9);
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pdf-modal-close:hover {
+  background: #000;
+}
+
+body.pdf-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .pdf-modal {
+    padding: 8px;
+  }
+
+  .pdf-modal-panel {
+    width: 98vw;
+    height: 94vh;
+  }
+
+  .preview-cover {
+    min-height: 360px;
+  }
+}
+
 </style>
+
+  <!-- Full-screen portfolio preview -->
+  <div class="pdf-modal" id="pdfModal" aria-hidden="true">
+    <div class="pdf-modal-backdrop" data-close-pdf></div>
+    <div class="pdf-modal-panel" role="dialog" aria-modal="true" aria-label="Portfolio PDF preview">
+      <button class="pdf-modal-close" type="button" data-close-pdf aria-label="Close preview">×</button>
+      <iframe id="pdfModalFrame" src="" title="Portfolio PDF full-screen preview"></iframe>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfModalFrame');
+      const triggers = document.querySelectorAll('.preview-trigger');
+      const closeButtons = document.querySelectorAll('[data-close-pdf]');
+
+      function openPreview(pdf) {
+        frame.src = pdf;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('pdf-modal-open');
+      }
+
+      function closePreview() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        frame.src = '';
+        document.body.classList.remove('pdf-modal-open');
+      }
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          openPreview(trigger.getAttribute('data-pdf'));
+        });
+      });
+
+      closeButtons.forEach(function (button) {
+        button.addEventListener('click', closePreview);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+          closePreview();
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
