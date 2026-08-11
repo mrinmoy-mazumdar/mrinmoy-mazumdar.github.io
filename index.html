@@ -47,19 +47,18 @@
             <span>BOOK / DTP</span>
           </div>
 
-          <a class="project-preview" href="https://drive.google.com/file/d/181UCRdbW8zLV4TqkNMyH46MqC70mXQKd/view" target="_blank" rel="noopener noreferrer" aria-label="Open Portfolio Sample 01">
+          <div class="project-preview">
             <iframe
               src="https://drive.google.com/file/d/181UCRdbW8zLV4TqkNMyH46MqC70mXQKd/preview"
-              title="Portfolio Sample 01"
+              title="Portfolio Sample 01 Preview"
               loading="lazy"
               allow="autoplay">
             </iframe>
-            <span class="preview-label">OPEN PROJECT ↗</span>
-          </a>
+          </div>
 
           <div class="project-caption">
             <div>
-              <p class="project-kicker">EDUCATIONAL PUBLISHING (K-12)</p>
+              <p class="project-kicker">EDUCATIONAL PUBLISHING</p>
               <h2>Book Layout &amp;<br>Typesetting</h2>
             </div>
             <p class="project-description">Structured page design for long-form publications, with emphasis on readable hierarchy, consistent grids, typography and print-ready execution.</p>
@@ -71,6 +70,7 @@
             <span>Style Sheets</span>
             <span>Print PDF</span>
           </div>
+          <a class="view-work-link" href="https://drive.google.com/file/d/181UCRdbW8zLV4TqkNMyH46MqC70mXQKd/view" target="_blank" rel="noopener noreferrer">View Work ↗</a>
         </article>
 
         <article class="portfolio-project">
@@ -79,15 +79,14 @@
             <span>EDITORIAL / PRINT</span>
           </div>
 
-          <a class="project-preview" href="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/view" target="_blank" rel="noopener noreferrer" aria-label="Open Portfolio Sample 02">
+          <div class="project-preview">
             <iframe
               src="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/preview"
-              title="Portfolio Sample 02"
+              title="Portfolio Sample 02 Preview"
               loading="lazy"
               allow="autoplay">
             </iframe>
-            <span class="preview-label">OPEN PROJECT ↗</span>
-          </a>
+          </div>
 
           <div class="project-caption">
             <div>
@@ -103,13 +102,14 @@
             <span>Image Editing</span>
             <span>Pre-Press</span>
           </div>
+          <a class="view-work-link" href="https://drive.google.com/file/d/1vBcUPJgxIGoEvkwamCtCfKMvYRTW5EAj/view" target="_blank" rel="noopener noreferrer">View Work ↗</a>
         </article>
 
       </div>
 
       <div class="portfolio-footer">
         <span>SELECTED WORK</span>
-        <span>MORE PROJECTS AVAILABLE ON REQUEST</span>
+        
       </div>
 
     </div>
@@ -382,6 +382,22 @@
   font-size: .62rem;
   letter-spacing: .08em;
   text-transform: uppercase;
+}
+
+.view-work-link {
+  display: inline-block;
+  margin-top: 18px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.view-work-link:hover {
+  opacity: .65;
 }
 
 .portfolio-footer {
