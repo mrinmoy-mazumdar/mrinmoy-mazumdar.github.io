@@ -1,0 +1,1 @@
+Replace the placeholder project cards with approved project images.
